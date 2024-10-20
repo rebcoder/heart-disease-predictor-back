@@ -16,7 +16,7 @@ public class PredictionController {
     private PredictionService predictionService;
 
     @PostMapping("/predict")
-    public ResponseEntity<HashMap<String,String>> predictHeartDisease(@RequestBody PredictionRequest request) {
+    public ResponseEntity<String> predictHeartDisease(@RequestBody PredictionRequest request) {
         return new ResponseEntity<>(predictionService.predictHeartDisease(request), HttpStatus.OK);
     }
 }
