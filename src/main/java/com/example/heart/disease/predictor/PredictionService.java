@@ -12,15 +12,14 @@ import java.util.Map;
 public class PredictionService {
 
     public String predictHeartDisease(PredictionRequest request) {
-        String pythonApiUrl = "http://localhost:5000/predict";  // Python Flask API URL
-
-        // Send input data to Python API
         RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<Map> response = restTemplate.postForEntity(pythonApiUrl, request, Map.class);
 
-        // Get prediction from Python API response
-        Map<String, Object> result = response.getBody();
+        // Your Flask API URL
+        String PREDICTION_API_URL = "http://localhost:5000/predict";
 
-        return (String) result.get("prediction");
+        // Send the features as a POST request to the Python model API
+        String prediction = restTemplate.postForObject(PREDICTION_API_URL, request, String.class);
+
+        return prediction; // Return the prediction result
     }
 }
